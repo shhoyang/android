@@ -19,6 +19,7 @@ import com.hao.library.utils.DisplayUtils
 import com.hao.library.utils.L
 import com.hao.library.utils.T
 import com.hao.library.view.ToolbarLayout
+import com.hao.library.view.dialog.LoadingDialog
 
 /**
  * @author Yang Shihao
@@ -35,6 +36,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
     var vm: VM? = null
 
     private var toolbarLayout: ToolbarLayout? = null
+
+    private var loadingDialog: LoadingDialog? = null
 
     protected val uiParams = UIParams()
 
@@ -63,6 +66,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
     override fun onDestroy() {
         super.onDestroy()
         vb = null
+        loadingDialog = null
         AppManager.instance().popActivity(this)
     }
 
@@ -87,6 +91,19 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     fun viewModel(block: VM.() -> Unit) {
         vm?.let(block)
+    }
+
+    fun showLoading(message: String? = null) {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(this)
+        }
+        loadingDialog?.setMessage(message)?.show()
+    }
+
+    fun hideLoading() {
+        if (loadingDialog?.isShowing == true) {
+            loadingDialog?.dismiss()
+        }
     }
 
     fun toast(text: String?) {

@@ -49,9 +49,9 @@ class LoadingDialog(
         }
     }
 
-    fun setMessage(message: String): LoadingDialog {
+    fun setMessage(message: String?): LoadingDialog {
         viewBinding {
-            if (tvMessage.text != message) {
+            if (message != null && tvMessage.text != message) {
                 tvMessage.text = message
             }
         }

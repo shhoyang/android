@@ -19,6 +19,20 @@ class AppManager private constructor() {
         process { it.javaClass == cls }
     }
 
+    /**
+     * 移除指定类名的Activity之外的所有Activity
+     */
+    fun finishAllActivityExceptAppoint(cls: Class<out Activity>) {
+        process { it.javaClass != cls }
+    }
+
+    /**
+     * 移除指定类名的Activity之外的所有Activity
+     */
+    fun finishAllActivityExceptAppoint(activity: Activity) {
+        process { it != activity }
+    }
+
     fun exit() {
         process { true }
         android.os.Process.killProcess(android.os.Process.myPid())

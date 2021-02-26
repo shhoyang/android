@@ -84,6 +84,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         }
     }
 
+    fun showLoading() {
+        act { it.showLoading() }
+    }
+
+    fun hideLoading() {
+        act { it.hideLoading() }
+    }
+
     fun toast(msg: String?) {
         act { it.toast(msg) }
     }

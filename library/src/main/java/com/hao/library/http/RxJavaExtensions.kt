@@ -6,7 +6,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketException
@@ -36,7 +35,6 @@ fun <D, T : HttpResponseModel<D>> Observable<T>.subscribeBy(
             }
         }
     }, {
-        OkHttpClient
         val error: Pair<String, String> = when (it) {
             is UnknownHostException, is ConnectException, is SocketException, is SocketTimeoutException, is HttpException -> Pair(
                 "-200",
@@ -48,7 +46,28 @@ fun <D, T : HttpResponseModel<D>> Observable<T>.subscribeBy(
             toast(error.second)
         }
         onFailure(error)
+    })
 
+fun <T> Observable<T>.subscribeBy2(
+    onResponse: (T?) -> Unit,
+    onFailure: (Pair<String, String>) -> Unit = {},
+    toastWhenFailed: Boolean = false
+): Disposable = subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        onResponse(it)
+    }, {
+        val error: Pair<String, String> = when (it) {
+            is UnknownHostException, is ConnectException, is SocketException, is SocketTimeoutException, is HttpException -> Pair(
+                "-200",
+                "网络异常"
+            )
+            else -> Pair("-300", "未知异常")
+        }
+        if (toastWhenFailed) {
+            toast(error.second)
+        }
+        onFailure(error)
     })
 
 fun toast(msg: String) {

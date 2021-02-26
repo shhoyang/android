@@ -1,0 +1,5 @@
+include ':library'
+include ':library-compiler'
+include ':library-annotation'
+include ':app'
+rootProject.name = "HaoLibrary"

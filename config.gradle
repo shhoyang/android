@@ -1,0 +1,30 @@
+ext {
+    versions = [
+            compileSdk : 30,
+            buildTools : '30.0.3',
+            minSdk     : 23,
+            targetSdk  : 30,
+
+            versionCode: 1,
+            versionName: '1.0.1',
+
+            kotlin     : '1.4.30',
+            paging     : '2.1.2',
+            room       : '2.2.5',
+            lifecycle  : '2.2.0',
+            navigation : '2.3.2',
+            coroutines : '1.4.2-native-mt',
+
+            retrofit   : '2.9.0',
+            glide      : '4.11.0'
+    ]
+
+    compilers = [
+            'lifecycle': "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle",
+            'room'     : "androidx.room:room-compiler:$versions.room",
+            'glide'    : "com.github.bumptech.glide:compiler:$versions.glide",
+            'arouter'  : 'com.alibaba:arouter-compiler:1.2.2'
+    ]
+
+    compilerDependencies = compilers.values()
+}

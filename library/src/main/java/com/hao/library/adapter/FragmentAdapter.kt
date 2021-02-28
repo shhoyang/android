@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.hao.library.ui.FragmentCreator
 
 /**
  * @author Yang Shihao
@@ -32,7 +33,5 @@ class FragmentAdapter(
     }
 }
 
-interface FragmentCreator {
-    fun createFragment(): Fragment
-}
+
 

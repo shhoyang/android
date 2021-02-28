@@ -15,7 +15,7 @@ class AppManager private constructor() {
         process { it == activity }
     }
 
-    fun finishActivity(cls: Class<Activity>) {
+    fun finishActivity(cls: Class<out Activity>) {
         process { it.javaClass == cls }
     }
 

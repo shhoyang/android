@@ -155,12 +155,4 @@ class ProgressWebView : WebView {
             loadUrl(address)
         }
     }
-
-    interface WebViewLoadListener {
-        fun pageFinished()
-
-        fun pageLoadError()
-
-        fun progressChanged(newProgress: Int)
-    }
 }

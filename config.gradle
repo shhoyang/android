@@ -6,9 +6,9 @@ ext {
             targetSdk  : 30,
 
             versionCode: 1,
-            versionName: '1.0.4',
+            versionName: '1.0.5',
 
-            kotlin     : '1.4.30',
+            kotlin     : '1.4.31',
             paging     : '2.1.2',
             room       : '2.2.5',
             lifecycle  : '2.2.0',

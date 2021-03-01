@@ -6,12 +6,12 @@ import android.view.WindowManager
 import com.hao.library.annotation.AndroidEntryPoint
 import com.hao.library.databinding.ActivityWebBinding
 import com.hao.library.view.web.ProgressAnimHelper
-import com.hao.library.view.web.ProgressWebView
+import com.hao.library.view.web.WebViewLoadListener
 import com.hao.library.viewmodel.PlaceholderViewModel
 
 @AndroidEntryPoint(injectViewModel = false)
 class WebActivity : BaseActivity<ActivityWebBinding, PlaceholderViewModel>(),
-    ProgressWebView.WebViewLoadListener {
+    WebViewLoadListener {
 
     private var progressAnimHelper: ProgressAnimHelper? = null
 
@@ -36,12 +36,10 @@ class WebActivity : BaseActivity<ActivityWebBinding, PlaceholderViewModel>(),
     }
 
     override fun onBackPressed() {
-        viewBinding {
-            if (baseWebView.canGoBack()) {
-                baseWebView.goBack()
-            } else {
-                super.onBackPressed()
-            }
+        if (vb?.baseWebView != null && vb!!.baseWebView.canGoBack()) {
+            vb!!.baseWebView.goBack()
+        } else {
+            super.onBackPressed()
         }
     }
 

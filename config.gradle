@@ -6,7 +6,7 @@ ext {
             targetSdk  : 30,
 
             versionCode: 1,
-            versionName: '1.0.6',
+            versionName: '1.0.8',
 
             kotlin     : '1.4.31',
             paging     : '2.1.2',
@@ -16,7 +16,7 @@ ext {
             coroutines : '1.4.2-native-mt',
 
             retrofit   : '2.9.0',
-            glide      : '4.11.0'
+            glide      : '4.12.0'
     ]
 
     compilers = [

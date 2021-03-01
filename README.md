@@ -24,6 +24,11 @@ dependencies {
     ...
     implementation 'com.github.haoshiy.android:library:version'
     kapt 'com.github.haoshiy.android:library-compiler:version'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    kapt "androidx.room:room-compiler:2.2.5"
+    kapt "com.github.bumptech.glide:compiler:4.11.0"
+    // If use router
+    kapt "com.alibaba:arouter-compiler:1.2.2"
 }
 ```
 

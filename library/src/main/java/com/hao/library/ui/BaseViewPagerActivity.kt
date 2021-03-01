@@ -8,10 +8,12 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hao.library.R
 import com.hao.library.adapter.FragmentAdapter
+import com.hao.library.annotation.Base
 
 /**
  * @author Yang Shihao
  */
+@Base
 abstract class BaseViewPagerActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>() {
 
     @CallSuper

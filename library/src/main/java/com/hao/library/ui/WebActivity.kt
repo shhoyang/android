@@ -13,7 +13,7 @@ import com.hao.library.view.web.ProgressWebView
 import com.hao.library.view.web.WebViewLoadListener
 
 @Base
-class WebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
+class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
     WebViewLoadListener {
 
     private var webView: ProgressWebView? = null
@@ -31,7 +31,7 @@ class WebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
             progressAnimHelper = ProgressAnimHelper(progressBar!!)
         }
         webView?.apply {
-            setWebViewLoadListener(this@WebActivity)
+            setWebViewLoadListener(this@BaseWebActivity)
             doLoadUrl(intent.getStringExtra(URL) ?: "")
         }
     }
@@ -75,7 +75,7 @@ class WebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
         private const val URL = "URL"
 
         fun start(context: Context, title: String, url: String) {
-            val intent = Intent(context, WebActivity::class.java)
+            val intent = Intent(context, BaseWebActivity::class.java)
             intent.putExtra(TITLE, title)
             intent.putExtra(URL, url)
             context.startActivity(intent)

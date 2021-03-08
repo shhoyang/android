@@ -11,10 +11,6 @@
         <service
             android:name=".service.InitX5Service"
             android:process=":h5" />
-        <activity
-            android:name=".ui.WebActivity"
-            android:process=":h5"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

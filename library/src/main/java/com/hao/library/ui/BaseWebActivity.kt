@@ -1,9 +1,8 @@
 package com.hao.library.ui
 
-import android.content.Context
-import android.content.Intent
 import android.view.WindowManager
 import android.widget.ProgressBar
+import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import com.hao.library.R
@@ -13,7 +12,7 @@ import com.hao.library.view.web.ProgressWebView
 import com.hao.library.view.web.WebViewLoadListener
 
 @Base
-class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
+abstract class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>(),
     WebViewLoadListener {
 
     private var webView: ProgressWebView? = null
@@ -21,19 +20,16 @@ class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>()
 
     private var progressAnimHelper: ProgressAnimHelper? = null
 
+    @CallSuper
     override fun initView() {
         window.addFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
         webView = f(R.id.baseWebView)
         progressBar = f(R.id.baseProgressBar)
-        title = intent.getStringExtra(TITLE)
 
         if (progressBar != null) {
             progressAnimHelper = ProgressAnimHelper(progressBar!!)
         }
-        webView?.apply {
-            setWebViewLoadListener(this@BaseWebActivity)
-            doLoadUrl(intent.getStringExtra(URL) ?: "")
-        }
+        webView?.setWebViewLoadListener(this)
     }
 
     override fun initData() {
@@ -65,21 +61,12 @@ class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<VB, VM>()
         progressAnimHelper?.progressChanged(newProgress)
     }
 
-    fun getWevView(): ProgressWebView? {
-        return webView
+    fun load(url: String) {
+        webView?.doLoadUrl(url)
     }
 
-    companion object {
-
-        private const val TITLE = "TITLE"
-        private const val URL = "URL"
-
-        fun start(context: Context, title: String, url: String) {
-            val intent = Intent(context, BaseWebActivity::class.java)
-            intent.putExtra(TITLE, title)
-            intent.putExtra(URL, url)
-            context.startActivity(intent)
-        }
+    fun getWevView(): ProgressWebView? {
+        return webView
     }
 }
 

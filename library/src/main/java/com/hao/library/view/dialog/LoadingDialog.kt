@@ -44,7 +44,7 @@ class LoadingDialog(
         viewBinding {
             if (0 != loadingLayoutId) {
                 loading.removeAllViews()
-                loading.addView(View.inflate(activity, loadingLayoutId, loading))
+                View.inflate(activity, loadingLayoutId, loading)
             }
         }
     }

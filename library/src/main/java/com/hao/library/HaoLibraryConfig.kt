@@ -1,32 +1,51 @@
 package com.hao.library
 
-import com.hao.library.http.HttpResponseModel
+import android.app.Application
+import androidx.annotation.StyleRes
 
 /**
  * @author Yang Shihao
  */
-abstract class HaoLibraryConfig {
+class HaoLibraryConfig private constructor(val application: Application) {
 
-    /**
-     * UI相关
-     * 自定义主题可以继承默认主题
-     */
-    open fun toolbarLayoutTheme() = R.style.ToolbarLayout
-    open fun emptyViewTheme() = R.style.EmptyView
-    open fun confirmDialogTheme() = R.style.ConfirmDialog
-    open fun loadingDialogTheme() = R.style.LoadingDialog
+    var toolbarLayoutTheme = R.style.ToolbarLayout
+    var emptyViewTheme = R.style.EmptyView
+    var confirmDialogTheme = R.style.ConfirmDialog
+    var loadingDialogTheme = R.style.LoadingDialog
 
-    /**
-     * 网络相关
-     */
-    abstract fun getBaseUrl(): String
+    lateinit var httpConfig: HttpConfig
 
-    abstract fun <T : HttpResponseModel<*>> handleResponse(t: T): Boolean
+    class Builder(application: Application) {
 
-    /**
-     * 登录相关
-     */
-    abstract fun isLogin(): Boolean
+        private var haoLibraryConfig: HaoLibraryConfig = HaoLibraryConfig(application)
 
-    abstract fun login()
+        fun setToolbarLayoutTheme(@StyleRes themeResId: Int): Builder {
+            haoLibraryConfig.toolbarLayoutTheme = themeResId
+            return this
+        }
+
+        fun setEmptyViewTheme(@StyleRes themeResId: Int): Builder {
+            haoLibraryConfig.emptyViewTheme = themeResId
+            return this
+        }
+
+        fun setConfirmDialogTheme(@StyleRes themeResId: Int): Builder {
+            haoLibraryConfig.confirmDialogTheme = themeResId
+            return this
+        }
+
+        fun setLoadingDialogTheme(@StyleRes themeResId: Int): Builder {
+            haoLibraryConfig.loadingDialogTheme = themeResId
+            return this
+        }
+
+        fun setHttpConfig(httpConfig: HttpConfig): Builder {
+            haoLibraryConfig.httpConfig = httpConfig
+            return this
+        }
+
+        fun build(): HaoLibraryConfig {
+            return haoLibraryConfig
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.hao.library
 
-import android.content.Context
+import android.app.Application
 import com.hao.library.extensions.notNullSingleValue
 
 /**
@@ -9,11 +9,11 @@ import com.hao.library.extensions.notNullSingleValue
 
 object HaoLibrary {
 
-    var context by notNullSingleValue<Context>()
+    var context by notNullSingleValue<Application>()
     var CONFIG by notNullSingleValue<HaoLibraryConfig>()
 
-    fun init(context: Context, libraryConfig: HaoLibraryConfig) {
-        this.context = context
+    fun init(libraryConfig: HaoLibraryConfig) {
         this.CONFIG = libraryConfig
+        this.context = libraryConfig.application
     }
 }

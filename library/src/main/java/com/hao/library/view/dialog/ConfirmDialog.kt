@@ -21,7 +21,7 @@ import com.hao.library.utils.DisplayUtils
 class ConfirmDialog(
     activity: Activity,
     private val params: Params,
-    @StyleRes themeResId: Int = HaoLibrary.CONFIG.confirmDialogTheme()
+    @StyleRes themeResId: Int = HaoLibrary.CONFIG.confirmDialogTheme
 ) :
     BaseDialog<DialogConfirmBinding>(activity, themeResId),
     View.OnClickListener,

@@ -57,7 +57,7 @@ class ToolbarLayout : FrameLayout {
             attrs,
             R.styleable.ToolbarLayout,
             defStyleAttr,
-            HaoLibrary.CONFIG.toolbarLayoutTheme()
+            HaoLibrary.CONFIG.toolbarLayoutTheme
         )
             .apply {
                 layoutId = getResourceId(R.styleable.ToolbarLayout_toolbarLayoutId, 0)

@@ -33,10 +33,10 @@ class CheckLoginAspect {
         val signature = joinPoint.signature as MethodSignature
         val annotation = signature.method.getAnnotation(CheckLogin::class.java)
         if (annotation != null) {
-            if (HaoLibrary.CONFIG.isLogin()) {
+            if (HaoLibrary.CONFIG.httpConfig.isLogin()) {
                 joinPoint.proceed()
             } else {
-                HaoLibrary.CONFIG.login()
+                HaoLibrary.CONFIG.httpConfig.login()
             }
         }
     }

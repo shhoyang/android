@@ -6,7 +6,6 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.GsonBuilder
 import com.hao.library.HaoLibrary
 import com.hao.library.utils.L
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,12 +31,6 @@ object HttpManager {
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
         .cookieJar(PERSISTENT_COOKIE_JAR)
-        .addInterceptor(Interceptor { chain ->
-            val original = chain.request()
-            val builder = original.newBuilder()
-            builder.method(original.method, original.body)
-            chain.proceed(builder.build())
-        })
         .addInterceptor(
             HttpLoggingInterceptor { message -> L.json("json__", message) }
                 .setLevel(
@@ -47,7 +40,7 @@ object HttpManager {
         .build()
 
     val RETROFIT: Retrofit = Retrofit.Builder()
-        .baseUrl(HaoLibrary.CONFIG.getBaseUrl())
+        .baseUrl(HaoLibrary.CONFIG.httpConfig.getBaseUrl())
         .client(OK_HTTP_CLIENT)
         .addConverterFactory(
             GsonConverterFactory.create(

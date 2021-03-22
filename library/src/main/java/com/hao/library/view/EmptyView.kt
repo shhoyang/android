@@ -76,7 +76,7 @@ class EmptyView : FrameLayout {
             attrs,
             R.styleable.EmptyView,
             defStyleAttr,
-            HaoLibrary.CONFIG.emptyViewTheme()
+            HaoLibrary.CONFIG.emptyViewTheme
         ).apply {
             iconColor = getColor(
                 R.styleable.EmptyView_emptyViewIconColor,

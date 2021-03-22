@@ -21,7 +21,7 @@ fun <D, T : HttpResponseModel<D>> Observable<T>.subscribeBy(
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
         // 没有消费
-        if (!HaoLibrary.CONFIG.handleResponse(it)) {
+        if (!HaoLibrary.CONFIG.httpConfig.handleResponse(it)) {
             if (it.isSucceed()) {
                 if (toastWhenSucceed) {
                     toast(it.getMessage())

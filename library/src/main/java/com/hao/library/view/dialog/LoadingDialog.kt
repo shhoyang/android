@@ -15,7 +15,7 @@ import com.hao.library.utils.DisplayUtils
  */
 class LoadingDialog(
     activity: Activity,
-    @StyleRes themeResId: Int = HaoLibrary.CONFIG.loadingDialogTheme()
+    @StyleRes themeResId: Int = HaoLibrary.CONFIG.loadingDialogTheme
 ) :
     BaseDialog<DialogLoadingBinding>(activity, themeResId) {
 

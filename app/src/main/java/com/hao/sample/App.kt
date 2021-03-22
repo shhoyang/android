@@ -3,6 +3,7 @@ package com.hao.sample
 import android.app.Application
 import com.hao.library.HaoLibrary
 import com.hao.library.HaoLibraryConfig
+import com.hao.library.HttpConfig
 import com.hao.library.http.HttpResponseModel
 
 /**
@@ -12,28 +13,29 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        HaoLibrary.init(this, haoLibraryConfig)
+        HaoLibrary.init(
+            HaoLibraryConfig.Builder(this)
+                .setHttpConfig(MyHttpConfig())
+                .build()
+        )
     }
 
-    private val haoLibraryConfig by lazy {
+    class MyHttpConfig : HttpConfig {
 
-        object : HaoLibraryConfig() {
+        override fun getBaseUrl(): String {
+            return "http://"
+        }
 
-            override fun getBaseUrl(): String {
-                return "http://"
-            }
+        override fun <T : HttpResponseModel<*>> handleResponse(t: T): Boolean {
+            return false
+        }
 
-            override fun <T : HttpResponseModel<*>> handleResponse(t: T): Boolean {
-                return false
-            }
+        override fun isLogin(): Boolean {
+            return false
+        }
 
-            override fun isLogin(): Boolean {
-                return false
-            }
+        override fun login() {
 
-            override fun login() {
-
-            }
         }
     }
 }

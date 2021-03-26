@@ -1,7 +1,6 @@
 package com.hao.library.ui
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -105,8 +104,12 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         act { it.toA(cls, isFinish) }
     }
 
-    val toA: (Class<out Activity>, Boolean) -> Unit = { cls, isFinish ->
-        act { it.toA(cls, isFinish) }
+    val toActivity: (Class<out Activity>) -> Unit = { cls ->
+        act { it.toA(cls, false) }
+    }
+
+    val toActivityAndFinish: (Class<out Activity>) -> Unit = { cls ->
+        act { it.toA(cls, true) }
     }
 
     fun <T : View> f(id: Int): T? {

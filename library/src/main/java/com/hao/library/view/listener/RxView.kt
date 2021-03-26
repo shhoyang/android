@@ -10,21 +10,6 @@ object RxView {
 
     private const val CLICK_INTERVAL = 1000
 
-    fun textChanges(et1: EditText, et2: EditText, block: (String, String) -> Unit) {
-        et1.addTextChangedListener(object : SimpleTextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                block(s.toString(), et2.text.toString())
-            }
-        })
-
-        et2.addTextChangedListener(object : SimpleTextWatcher {
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                block(et1.text.toString(), s.toString())
-            }
-        })
-    }
-
     fun textChanges(vararg et: EditText, block: () -> Unit) {
         et.forEach {
             it.addTextChangedListener(object : SimpleTextWatcher {

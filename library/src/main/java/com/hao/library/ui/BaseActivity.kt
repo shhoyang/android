@@ -121,6 +121,13 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         }
     }
 
+    val toA: (Class<out Activity>, Boolean) -> Unit = { cls, isFinish ->
+        startActivity(Intent(this, cls))
+        if (isFinish) {
+            finish()
+        }
+    }
+
     fun <T : View> f(id: Int): T? {
         return vb?.root?.findViewById(id)
     }

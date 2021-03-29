@@ -61,7 +61,23 @@ fun <T> Observable<T>.subscribeBy2(
         onFailure(error)
     })
 
-fun <T> Observable<T>.subscribeBy3(
+fun <D, T : HttpResponseModel<D>> Observable<T>.subscribeBy3(
+    onResponse: (D?) -> Unit,
+    onFailure: (ResponseException) -> Unit = {},
+): Disposable = subscribe({
+    // 没有消费
+    if (!HaoLibrary.CONFIG.httpConfig.handleResponse(it)) {
+        if (it.isSucceed()) {
+            onResponse(it.getData())
+        } else {
+            onFailure(ResponseException(it.getCode(), it.getMessage(), it.getMessage()))
+        }
+    }
+}, {
+    onFailure(processError(it))
+})
+
+fun <T> Observable<T>.subscribeBy4(
     onResponse: (T?) -> Unit,
     onFailure: (ResponseException) -> Unit,
 ): Disposable =
@@ -76,10 +92,14 @@ fun toast(msg: String) {
 }
 
 fun processError(throwable: Throwable): ResponseException {
-
+    throwable.printStackTrace()
     if (throwable is HttpException) {
         var code = throwable.code().toString()
         return ResponseException(code, code, throwable.message())
+    }
+    if (throwable is CustomException) {
+        val msg = throwable.message ?: HttpCode.UNKNOWN.errorMsg
+        return ResponseException(HttpCode.UNKNOWN.errorCode, msg, msg)
     }
     return with(
         when (throwable) {

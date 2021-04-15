@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.hao.library.HaoLibrary
 import com.hao.library.R
@@ -97,6 +98,10 @@ class ToolbarLayout : FrameLayout {
 
     fun setTitleText(text: String) {
         toolbarTitle?.text = text
+    }
+
+    fun setTitleText(@StringRes resId: Int) {
+        toolbarTitle?.text = context.getString(resId)
     }
 
     fun setTitleTextColor(color: Int) {

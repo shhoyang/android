@@ -1,7 +1,6 @@
 package com.hao.sample
 
 import android.app.Application
-import com.hao.library.HaoLibrary
 import com.hao.library.HaoLibraryConfig
 import com.hao.library.HttpConfig
 import com.hao.library.http.HttpResponseModel
@@ -13,11 +12,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        HaoLibrary.init(
-            HaoLibraryConfig.Builder(this)
-                .setHttpConfig(MyHttpConfig())
-                .build()
-        )
+        HaoLibraryConfig.Builder(this)
+            .setHttpConfig(MyHttpConfig())
+            .apply()
     }
 
     class MyHttpConfig : HttpConfig {

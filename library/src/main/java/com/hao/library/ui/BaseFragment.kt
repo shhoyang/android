@@ -104,14 +104,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         act { it.toA(cls, isFinish) }
     }
 
-    val toActivity: (Class<out Activity>) -> Unit = { cls ->
-        act { it.toA(cls, false) }
-    }
-
-    val toActivityAndFinish: (Class<out Activity>) -> Unit = { cls ->
-        act { it.toA(cls, true) }
-    }
-
     fun <T : View> f(id: Int): T? {
         return vb?.root?.findViewById(id)
     }

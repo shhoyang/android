@@ -35,7 +35,7 @@ abstract class BaseNormalListFragment<VB : ViewBinding, D, VM : ViewModel, A : B
         val recyclerView: RecyclerView = f(R.id.baseRecyclerView)!!
         registerDataObserver()
         adapter.setOnItemClickListener(this)
-        recyclerView.layoutManager = getLayoutManager()
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         this.refreshLayout?.setOnRefreshListener {
             onRefresh()
@@ -55,10 +55,6 @@ abstract class BaseNormalListFragment<VB : ViewBinding, D, VM : ViewModel, A : B
                 }
             }
         })
-    }
-
-    open fun getLayoutManager(): RecyclerView.LayoutManager {
-        return LinearLayoutManager(context)
     }
 
     open fun onRefresh() {

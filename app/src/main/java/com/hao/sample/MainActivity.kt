@@ -15,11 +15,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainVM>() {
     lateinit var mainAdapter: MainAdapter
 
     override fun initView() {
-        toolbarLayout {
-            showBack(false)
-            setTitleText("HaoLibrary")
-        }
         viewBinding {
+            baseToolbar.showBack(false)
+            baseToolbar.setTitleText("HaoLibrary")
             baseRecyclerView.init(mainAdapter)
         }
     }

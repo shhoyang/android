@@ -16,7 +16,6 @@ abstract class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<
     WebViewLoadListener {
 
     private var webView: ProgressWebView? = null
-    private var progressBar: ProgressBar? = null
 
     private var progressAnimHelper: ProgressAnimHelper? = null
 
@@ -24,12 +23,11 @@ abstract class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<
     override fun initView() {
         window.addFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
         webView = f(R.id.baseWebView)
-        progressBar = f(R.id.baseProgressBar)
-
+        webView?.setWebViewLoadListener(this)
+        val progressBar: ProgressBar? = f(R.id.baseProgressBar)
         if (progressBar != null) {
             progressAnimHelper = ProgressAnimHelper(progressBar!!)
         }
-        webView?.setWebViewLoadListener(this)
     }
 
     override fun initData() {
@@ -63,10 +61,6 @@ abstract class BaseWebActivity<VB : ViewBinding, VM : ViewModel> : BaseActivity<
 
     fun load(url: String) {
         webView?.doLoadUrl(url)
-    }
-
-    fun getWevView(): ProgressWebView? {
-        return webView
     }
 }
 

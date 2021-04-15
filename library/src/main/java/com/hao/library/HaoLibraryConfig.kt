@@ -44,8 +44,8 @@ class HaoLibraryConfig private constructor(val application: Application) {
             return this
         }
 
-        fun build(): HaoLibraryConfig {
-            return haoLibraryConfig
+        fun apply() {
+            HaoLibrary.init(haoLibraryConfig)
         }
     }
 }

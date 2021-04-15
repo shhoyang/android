@@ -34,7 +34,7 @@ abstract class BaseListActivity<VB : ViewBinding, D : PagedAdapterItem, VM : Bas
     override fun initView() {
         val recyclerView: RecyclerView = f(R.id.baseRecyclerView)!!
         adapter.setOnItemClickListener(this)
-        recyclerView.layoutManager = getLayoutManager()
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         this.refreshLayout = f(R.id.baseRefreshLayout)
         this.emptyView = f(R.id.baseEmptyView)
@@ -66,10 +66,6 @@ abstract class BaseListActivity<VB : ViewBinding, D : PagedAdapterItem, VM : Bas
                 }
             }
         }
-    }
-
-    open fun getLayoutManager(): RecyclerView.LayoutManager {
-        return LinearLayoutManager(this)
     }
 
     override fun itemClicked(view: View, item: D, position: Int) {

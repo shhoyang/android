@@ -1,5 +1,7 @@
 package com.hao.library.adapter
 
+import android.util.SparseArray
+import androidx.collection.SparseArrayCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -15,7 +17,7 @@ class FragmentAdapter(
     private var data: List<FragmentCreator>
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private var fragments = HashMap<Int, Fragment>()
+    private var fragments = SparseArrayCompat<Fragment>()
 
     override fun getItemCount() = data.size
 
@@ -23,13 +25,13 @@ class FragmentAdapter(
         var f = fragments[position]
         if (f == null) {
             f = data[position].createFragment()
-            fragments[position] = f
+            fragments.put(position, f)
         }
         return f
     }
 
     fun getFragment(position: Int): Fragment? {
-        return fragments[position]
+        return fragments.get(position)
     }
 }
 

@@ -35,7 +35,7 @@ abstract class BaseNormalListActivity<VB : ViewBinding, D, VM : ViewModel, A : B
         val recyclerView: RecyclerView = f(R.id.baseRecyclerView)!!
         registerDataObserver()
         adapter.setOnItemClickListener(this)
-        recyclerView.layoutManager = getLayoutManager()
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         this.refreshLayout?.setOnRefreshListener {
             onRefresh()
@@ -55,10 +55,6 @@ abstract class BaseNormalListActivity<VB : ViewBinding, D, VM : ViewModel, A : B
                 }
             }
         })
-    }
-
-    open fun getLayoutManager(): RecyclerView.LayoutManager {
-        return LinearLayoutManager(this)
     }
 
     open fun onRefresh() {

@@ -35,8 +35,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
     @InjectViewModel
     var vm: VM? = null
 
-    private var toolbarLayout: ToolbarLayout? = null
-
     private var loadingDialog: LoadingDialog? = null
 
     protected val uiParams = UIParams()
@@ -57,7 +55,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         }
         Dagger.inject(this)
         setContentView(vb?.root)
-        toolbarLayout = f(R.id.baseToolbar)
+        val toolbarLayout: ToolbarLayout? = f(R.id.baseToolbar)
         toolbarLayout?.setBackClickListener {
             onBackPressed()
         }
@@ -68,18 +66,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         vb = null
         loadingDialog = null
         AppManager.instance().popActivity(this)
-    }
-
-    fun toolbarLayout(block: ToolbarLayout.() -> Unit) {
-        toolbarLayout?.let(block)
-    }
-
-    override fun setTitle(title: CharSequence) {
-        toolbarLayout?.setTitleText(title.toString())
-    }
-
-    override fun setTitle(@StringRes titleId: Int) {
-        toolbarLayout?.setTitleText(getString(titleId))
     }
 
     open fun prepare(uiParams: UIParams, intent: Intent?) {
@@ -119,15 +105,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         if (isFinish) {
             finish()
         }
-    }
-
-    val toActivity: (Class<out Activity>) -> Unit = { cls ->
-        startActivity(Intent(this, cls))
-    }
-
-    val toActivityAndFinish: (Class<out Activity>) -> Unit = { cls ->
-        startActivity(Intent(this, cls))
-        finish()
     }
 
     fun <T : View> f(id: Int): T? {

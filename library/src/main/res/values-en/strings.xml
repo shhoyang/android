@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HaoLibrary</string>
+    <string name="appName">HaoLibrary</string>
 
     <string name="emptyViewLoadingText">Loading ...</string>
     <string name="emptyViewNoDataText">No Data</string>

@@ -70,6 +70,10 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         AppManager.instance().popActivity(this)
     }
 
+    fun toolbarLayout(block: ToolbarLayout.() -> Unit) {
+        toolbarLayout?.let(block)
+    }
+
     override fun setTitle(title: CharSequence) {
         toolbarLayout?.setTitleText(title.toString())
     }

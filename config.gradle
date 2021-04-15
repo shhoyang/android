@@ -6,7 +6,7 @@ ext {
             targetSdk  : 30,
 
             versionCode: 1,
-            versionName: '1.0.19',
+            versionName: '1.0.0',
 
             kotlin     : '1.4.31',
             paging     : '2.1.2',

@@ -32,6 +32,19 @@ dependencies {
 }
 ```
 
+**Step 3.** Add the option to your build file
+
+```
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        arg("DAGGER_VIEW_BINDING_FEATURE", "databinding")
+        arg("DAGGER_VIEW_MODEL_FEATURE", "viewmodel")
+        arg("DAGGER_ADAPTER_FEATURE", "adapter")
+    }
+}
+```
+
 # Demo
 
 [Demo](https://github.com/haoshiy/kotlin_wanandroid)
